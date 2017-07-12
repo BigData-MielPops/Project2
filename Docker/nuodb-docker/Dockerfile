@@ -1,13 +1,16 @@
 FROM java:openjdk-8-jre
 
-ENV nuodb_package nuodb-ce_2.6.1.5_amd64.deb
-RUN /usr/bin/apt-get update
-RUN /usr/bin/apt-get -y install default-jre-headless supervisor wget
+ENV DEBIAN_FRONTEND noninteractive
 
-RUN wget --output-document=/tmp/$nuodb_package https://studuniroma3-my.sharepoint.com/personal/gae_bonofiglio_stud_uniroma3_it/_layouts/15/guestaccess.aspx?docid=06716ef81e5cd464bbd53abc76251d5ad&authkey=AdqDLfjtheRH33nNCKuMrpY
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
+RUN apt-get install -y wget
+RUN apt-get -y install default-jre-headless supervisor
 
-RUN chmod 755 /tmp/$nuodb_package
-RUN /usr/bin/dpkg -i /tmp/$nuodb_package
+RUN wget -r -O /tmp/nuodb-ce_2.6.1.5_amd64.deb http://www.gaetanobonofiglio.com/public/nuodb-ce_2.6.1.5_amd64.deb
+RUN ls /tmp
+
+RUN chmod 755 /tmp/nuodb-ce_2.6.1.5_amd64.deb
+RUN /usr/bin/dpkg -i /tmp/nuodb-ce_2.6.1.5_amd64.deb
 
 RUN /bin/sed -ie 's/#domainPassword =/domainPassword = foo/' /opt/nuodb/etc/default.properties
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf

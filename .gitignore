@@ -101,4 +101,4 @@ ENV/
 .mypy_cache/
 
 
-Docker/shared-data/*
+Docker/shared-data/sociallink*
