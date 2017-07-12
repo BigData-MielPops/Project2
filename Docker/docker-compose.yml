@@ -186,7 +186,7 @@ services:
 
 # docker build -t nuodb:latest ./nuodb-docker
   nuodb:
-    image: voltdb/voltdb-community
+    image: nuodb
     privileged: true
     container_name: nuodb
     tty: true
