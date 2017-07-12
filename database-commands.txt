@@ -71,6 +71,9 @@ http://docs.sqlalchemy.org/en/latest/
 
 http://odo.pydata.org/en/latest/overview.html
 
+comandi utili per psql:
+
+
 MYSQL
 
 import csv:
