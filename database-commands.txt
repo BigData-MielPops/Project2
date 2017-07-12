@@ -1,0 +1,86 @@
+MONGODB
+
+import da csv:
+
+mongoimport --db nomedb --collection nomecollezione --type csv --headerline --file percorso/file.csv
+
+mongo (shell)
+
+REDIS
+
+mass import through protocol
+
+https://redis.io/topics/mass-insert
+
+https://codereview.stackexchange.com/questions/68612/store-csv-in-redis
+
+cat /shared_data/mock_data_10000_rows2.csv | redis-cli --pipe
+echo GET 0 | redis-cli
+
+NEO4J
+
+import da csv:
+https://neo4j.com/developer/guide-importing-data-and-etl/
+https://neo4j.com/developer/guide-import-csv/
+
+ORIENTDB
+
+import da json:
+https://orientdb.com/docs/2.2/Import-from-JSON.html
+
+CASSANDRA
+
+import da csv:
+https://docs.datastax.com/en/cql/3.1/cql/cql_reference/copy_r.html
+
+POSTGRES
+
+import da csv:
+
+CREATE TABLE zip_codes 
+(ZIP char(5), LATITUDE double precision, LONGITUDE double precision, 
+CITY varchar, STATE char(2), COUNTY varchar, ZIP_CLASS varchar);
+Copy data from your CSV file to the table:
+
+COPY zip_codes FROM '/path/to/csv/ZIP_CODES.txt' DELIMITER ',' CSV;
+
+per eseguire un singolo comando:
+-c command
+reference:
+https://www.postgresql.org/docs/9.1/static/app-psql.html
+
+http://docs.sqlalchemy.org/en/latest/
+
+MYSQL
+
+import csv:
+https://dev.mysql.com/doc/refman/5.7/en/mysqlimport.html
+
+http://docs.sqlalchemy.org/en/latest/
+
+MEMSQL
+
+https://docs.memsql.com/v5.8/docs/how-to-load-data-into-memsql
+
+http://docs.sqlalchemy.org/en/latest/
+
+VOLTDB
+
+import da csv:
+
+csvloader nometablella -f nomefile.csv
+https://docs.voltdb.com/UsingVoltDB/clicsvloader.php
+
+https://docs.voltdb.com/UsingVoltDB/
+
+COCKROACH
+
+https://www.cockroachlabs.com/docs/stable/import-data.html
+
+TRAFODION
+
+
+
+NUODB
+
+http://doc.nuodb.com/Latest/Content/NuoDB-Loader.htm

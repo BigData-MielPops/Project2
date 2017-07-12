@@ -1,0 +1,196 @@
+version: "2.1"
+
+services:
+
+#nosql
+
+  mongo:
+    image: mongo
+    privileged: true
+    container_name: mongo
+    tty: true
+    hostname: localhost
+    ports:
+      - "27017:27017"
+    environment:
+      - HOSTNAME=localhost
+    volumes:
+      - "./shared-data:/shared_data"
+      
+  redis:
+    image: redis
+    privileged: true
+    container_name: redis
+    tty: true
+    hostname: localhost
+    ports:
+      - "6379:6379"
+    environment:
+      - HOSTNAME=localhost
+    volumes:
+      - "./shared-data:/shared_data"
+
+  neo4j:
+    image: neo4j
+    privileged: true
+    container_name: neo4j
+    tty: true
+    hostname: localhost
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - HOSTNAME=localhost
+      - NEO4J_AUTH=none
+    volumes:
+      - "./shared-data:/shared_data"
+      
+  orientdb:
+    image: orientdb
+    privileged: true
+    container_name: orientdb
+    tty: true
+    hostname: localhost
+    ports:
+      - "2424:2424"
+      - "2480:2480"
+    environment:
+      - HOSTNAME=localhost
+      - ORIENTDB_ROOT_PASSWORD=password
+    volumes:
+      - "./shared-data:/shared_data"
+      
+  cassandra:
+    image: cassandra
+    privileged: true
+    container_name: cassandra
+    tty: true
+    ports:
+      - "7000:7000"
+      - "9042:9042"
+      - "7199:7199"
+    volumes:
+      - "./shared-data:/shared_data"
+
+#sql
+
+  postgres:
+    image: postgres
+    privileged: true
+    container_name: postgres
+    tty: true
+    hostname: localhost
+    ports:
+      - "5433:5432"
+    environment:
+      - HOSTNAME=localhost
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - "./shared-data:/shared_data"
+
+  mysql:
+    image: mysql
+    privileged: true
+    container_name: mysql
+    tty: true
+    hostname: localhost
+    ports:
+      - "3307:3306"
+    environment:
+      - HOSTNAME=localhost
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - "./shared-data:/shared_data"
+
+#newsql
+
+  memsql:
+    image: memsql/quickstart
+    privileged: true
+    container_name: memsql
+    tty: true
+    hostname: localhost
+    ports:
+      - "3306:3306"
+      - "9000:9000"
+    environment:
+      - HOSTNAME=localhost
+    volumes:
+      - "./shared-data:/shared_data"
+
+  voltdb:
+    image: voltdb/voltdb-community
+    privileged: true
+    container_name: voltdb
+    tty: true
+    hostname: voltdb
+    ports:
+      - "2200:22"
+      - "3021:3021" 
+      - "5555:5555" 
+      - "7181:7181" 
+      - "8085:8080" 
+      - "8086:8081" 
+      - "9001:9000" 
+      - "21211:21211"
+      - "21212:21212"
+    environment:
+      - HOST_COUNT=1 
+      - HOSTS=voltdb
+    volumes:
+      - "./shared-data:/shared_data"
+      
+  cockroach:
+    image: cockroachdb/cockroach
+    privileged: true
+    container_name: cockroach
+    tty: true
+    hostname: cockroach
+    command: start --insecure
+    ports:
+      - "26257:26257" 
+      - "8087:8080" 
+    environment:
+      - HOSTNAME=cockroach
+    volumes:
+      - "./shared-data:/shared_data"
+      
+  trafodion:
+  #The password of trafodion is traf123
+    image: trafodion/quickstart:2.0
+    privileged: true
+    container_name: trafodion
+    tty: true
+    hostname: trafdocker 
+    command: /usr/bin/quickstart
+    ports:
+      - "2201:22" 
+      - "23400:23400" 
+      - "23401:23401" 
+      - "23402:23402" 
+      - "23403:23403"
+      - "24400:24400"
+    volumes:
+      - "./shared-data:/shared_data"
+
+# docker build -t nuodb:latest ./nuodb-docker
+  nuodb:
+    image: nuodb
+    privileged: true
+    container_name: nuodb
+    tty: true
+    hostname: nuodb
+    ports:
+      - "58011:48011" 
+      - "58010:48010" 
+      - "58004:48004"
+    environment:
+      - HOSTNAME=nuodb
+      - ENV_TYPE=OPENSHIFT
+      - OC_ADDRESS=127.0.0.1
+      - USERNAME=developer
+      - PASSWORD=developer
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/nuodb/bin
+    volumes:
+      - "./shared-data:/shared_data"
+
