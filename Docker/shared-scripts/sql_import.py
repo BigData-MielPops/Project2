@@ -20,13 +20,19 @@ class customers(Base):
     ip_address = Column(VARCHAR)
     id = Column(Integer, primary_key=True, nullable=False)
 
-#Create Postgres database
-'''
+#Create Postgres database if not exists
+
 engine = create_engine('postgresql+psycopg2://postgres:password@localhost:5433')
 conn = engine.connect()
 conn.execute("commit")
-conn.execute("create database if not exists mock")
-conn.close()'''
+
+value = conn.execute("select count(*) from pg_catalog.pg_database where datname = 'mock' ;").fetchone()
+if value[0] == 1:
+    print "db already exists"
+else: 
+    print "creating new db"
+    conn.execute("create database if not exists mock")
+conn.close()
 
 #Import csv to Postgres
 engine = create_engine('postgresql+psycopg2://postgres:password@localhost:5433/mock')

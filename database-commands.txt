@@ -71,8 +71,15 @@ http://docs.sqlalchemy.org/en/latest/
 
 http://odo.pydata.org/en/latest/overview.html
 
-comandi utili per psql:
+script in sql_import.py
 
+comandi utili per psql:
+\connect database-name
+\list --> lista database
+\dt --> lista table nel db
+query: select * from table;
+
+postgres vuole utf-8
 
 MYSQL
 
