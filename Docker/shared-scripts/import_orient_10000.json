@@ -1,6 +1,6 @@
 {
   "config": {
-    "log": "debug"
+   
   },
 
   "source": { "file": { "path": "/shared_data/mock_data_10000_rows.csv" } 
