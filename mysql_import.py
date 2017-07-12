@@ -24,17 +24,18 @@ class customers(Base):
     ip_address = Column(VARCHAR(30))
     Id = Column(Integer, primary_key=True, nullable=False, autoincrement=False)
 
-#Create Mysql database if not exists
+def sql_import(path, verbose=False):
+    #Create Mysql database if not exists
 
-engine = create_engine('mysql+pymysql://root:password@localhost:3307')
-conn = engine.connect()
-conn.execute("commit")
-conn.execute("create database if not exists mock")
-conn.close()
+    engine = create_engine('mysql+pymysql://root:password@localhost:3307')
+    conn = engine.connect()
+    conn.execute("commit")
+    conn.execute("create database if not exists mock")
+    conn.close()
 
-#Import csv to Mysql
-engine = create_engine('mysql+pymysql://root:password@localhost:3307/mock')
-Base.metadata.create_all(engine)
-path_to_csv = os.path.join(os.path.abspath('../shared-data'),'mock_data_10000_rows_utf8.csv')
-df = pd.read_csv(path_to_csv)
-df.to_sql(con=engine, name='customers', if_exists='replace')
+    #Import csv to Mysql
+    engine = create_engine('mysql+pymysql://root:password@localhost:3307/mock')
+    Base.metadata.create_all(engine)
+    path_to_csv = path
+    df = pd.read_csv(path_to_csv)
+    df.to_sql(con=engine, name='customers', if_exists='replace')
