@@ -69,7 +69,6 @@ https://www.postgresql.org/docs/9.1/static/app-psql.html
 
 http://docs.sqlalchemy.org/en/latest/
 
-http://odo.pydata.org/en/latest/overview.html
 
 script in sql_import.py
 
@@ -88,7 +87,13 @@ https://dev.mysql.com/doc/refman/5.7/en/mysqlimport.html
 
 http://docs.sqlalchemy.org/en/latest/
 
-http://odo.pydata.org/en/latest/overview.html
+comandi utili per mysql:
+
+log: mysql -u root -p
+
+show databases
+use database_name
+show tables
 
 MEMSQL
 
