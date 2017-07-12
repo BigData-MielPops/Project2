@@ -16,6 +16,7 @@ services:
       - HOSTNAME=localhost
     volumes:
       - "./shared-data:/shared_data"
+      - "./shared-scripts:/shared_scripts"
       
   redis:
     image: redis
@@ -29,6 +30,7 @@ services:
       - HOSTNAME=localhost
     volumes:
       - "./shared-data:/shared_data"
+      - "./shared-scripts:/shared_scripts"
 
   neo4j:
     image: neo4j
@@ -44,6 +46,7 @@ services:
       - NEO4J_AUTH=none
     volumes:
       - "./shared-data:/shared_data"
+      - "./shared-scripts:/shared_scripts"
       
   orientdb:
     image: orientdb
@@ -59,6 +62,7 @@ services:
       - ORIENTDB_ROOT_PASSWORD=password
     volumes:
       - "./shared-data:/shared_data"
+      - "./shared-scripts:/shared_scripts"
       
   cassandra:
     image: cassandra
@@ -71,6 +75,7 @@ services:
       - "7199:7199"
     volumes:
       - "./shared-data:/shared_data"
+      - "./shared-scripts:/shared_scripts"
 
 #sql
 
@@ -87,6 +92,7 @@ services:
       - POSTGRES_PASSWORD=password
     volumes:
       - "./shared-data:/shared_data"
+      - "./shared-scripts:/shared_scripts"
 
   mysql:
     image: mysql
@@ -101,6 +107,7 @@ services:
       - MYSQL_ROOT_PASSWORD=password
     volumes:
       - "./shared-data:/shared_data"
+      - "./shared-scripts:/shared_scripts"
 
 #newsql
 
@@ -117,6 +124,7 @@ services:
       - HOSTNAME=localhost
     volumes:
       - "./shared-data:/shared_data"
+      - "./shared-scripts:/shared_scripts"
 
   voltdb:
     image: voltdb/voltdb-community
@@ -139,6 +147,7 @@ services:
       - HOSTS=voltdb
     volumes:
       - "./shared-data:/shared_data"
+      - "./shared-scripts:/shared_scripts"
       
   cockroach:
     image: cockroachdb/cockroach
@@ -154,6 +163,7 @@ services:
       - HOSTNAME=cockroach
     volumes:
       - "./shared-data:/shared_data"
+      - "./shared-scripts:/shared_scripts"
       
   trafodion:
   #The password of trafodion is traf123
@@ -172,6 +182,7 @@ services:
       - "24400:24400"
     volumes:
       - "./shared-data:/shared_data"
+      - "./shared-scripts:/shared_scripts"
 
 # docker build -t nuodb:latest ./nuodb-docker
   nuodb:
@@ -193,4 +204,5 @@ services:
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/nuodb/bin
     volumes:
       - "./shared-data:/shared_data"
+      - "./shared-scripts:/shared_scripts"
 
