@@ -25,13 +25,26 @@ https://neo4j.com/developer/guide-import-csv/
 
 ORIENTDB
 
-import da json:
-https://orientdb.com/docs/2.2/Import-from-JSON.html
+#import da json:
+#https://orientdb.com/docs/2.2/Import-from-JSON.html
+
+import da csv:   <------ più semplice
+
+scrivi configurazione etl in file json: import_orient_10000.json
+
+comandi:
+/orientdb/bin/oetl.sh /shared_import/import_orient_10000.json
+
+check del db tramite console: orientdb/bin/console.sh
+si interroga con query tipo: select * from Customer where income > 90
 
 CASSANDRA
 
 import da csv:
 https://docs.datastax.com/en/cql/3.1/cql/cql_reference/copy_r.html
+
+comandi:
+cqlsh -f /shared_data/import_mock_10000.cql
 
 POSTGRES
 
@@ -51,12 +64,16 @@ https://www.postgresql.org/docs/9.1/static/app-psql.html
 
 http://docs.sqlalchemy.org/en/latest/
 
+http://odo.pydata.org/en/latest/overview.html
+
 MYSQL
 
 import csv:
 https://dev.mysql.com/doc/refman/5.7/en/mysqlimport.html
 
 http://docs.sqlalchemy.org/en/latest/
+
+http://odo.pydata.org/en/latest/overview.html
 
 MEMSQL
 

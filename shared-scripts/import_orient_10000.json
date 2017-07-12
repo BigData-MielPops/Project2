@@ -1,0 +1,26 @@
+{
+  "config": {
+    "log": "debug"
+  },
+
+  "source": { "file": { "path": "/shared_data/mock_data_10000_rows.csv" } 
+  },
+
+  "extractor": { "csv": {} 
+  },
+
+  "transformers": [
+    { "vertex": { "class": "Customer" } }
+  ],
+  "loader": {
+    "orientdb": {
+       "dbURL": "plocal:/temp/databases/mock",
+       "dbType": "graph",
+       "classes": [
+         {"name": "Customer", "extends": "V"}
+       ], "indexes": [
+         {"class":"Customer", "fields":["Id:integer"], "type":"UNIQUE" }
+       ]
+    }
+  }
+}
