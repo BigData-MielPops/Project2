@@ -23,6 +23,11 @@ import da csv:
 https://neo4j.com/developer/guide-importing-data-and-etl/
 https://neo4j.com/developer/guide-import-csv/
 
+//commands to run:
+// cp /shared_data/mock_data_10000_neo.csv /var/lib/neo4j/import
+//
+// bin/neo4j-admin import --mode=csv --database=mock.db  --nodes:Customer import/mock_data_10000_neo.csv --id-type=string
+
 ORIENTDB
 
 #import da json:

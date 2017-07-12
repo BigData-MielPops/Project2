@@ -9,7 +9,6 @@ CREATE INDEX ON :Customer(lastName);
 schema await
 
 //commands to run:
-// cp /shared_data/import_mock_10000.cypher /var/lib/neo4j/import
-// cp /shared_data/mock_data_10000_rows.csv /var/lib/neo4j/import
+// cp /shared_data/mock_data_10000_neo.csv /var/lib/neo4j/import
 //
-// bin/neo4j-shell -path mock.db -file import/import_mock_10000.cypher
+// bin/neo4j-admin import --mode=csv --database=mock.db  --nodes:Customer import/mock_data_10000_neo.csv --id-type=string
