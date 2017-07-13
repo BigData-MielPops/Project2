@@ -101,6 +101,10 @@ https://docs.memsql.com/v5.8/docs/how-to-load-data-into-memsql
 
 http://docs.sqlalchemy.org/en/latest/
 
+log: memsql-shell
+
+stessi comandi di mysql
+
 VOLTDB
 
 import da csv:
@@ -109,6 +113,11 @@ csvloader nometablella -f nomefile.csv
 https://docs.voltdb.com/UsingVoltDB/clicsvloader.php
 
 https://docs.voltdb.com/UsingVoltDB/
+
+comandi:
+
+cat /shared_scripts/import_voltdb.sql | sqlcmd
+/opt/voltdb/bin/csvloader customers -f /shared_data/mock_data_10000_rows.csv
 
 COCKROACH
 
