@@ -70,12 +70,15 @@ https://www.postgresql.org/docs/9.1/static/app-psql.html
 http://docs.sqlalchemy.org/en/latest/
 
 
-script in sql_import.py
+script in postgres_import.py
 
 comandi utili per psql:
+docker exec -it --user postgres postgres bash
+
 \connect database-name
 \list --> lista database
 \dt --> lista table nel db
+\q --> quit
 query: select * from table;
 
 postgres vuole utf-8
@@ -122,6 +125,21 @@ cat /shared_scripts/import_voltdb.sql | sqlcmd
 COCKROACH
 
 https://www.cockroachlabs.com/docs/stable/import-data.html
+
+info:
+cockroachdb://root@localhost:26257/mock
+
+comandi utili:
+./cockroach sql
+\q --> quit
+
+./cockroach sql --insecure --database=mock < file.sql
+
+funziona:
+./cockroach sql --insecure --execute="create database if not exists mock;"
+
+psql -p 26257 -h 172.21.0.9 -d mock -U root < /shared_data/postgres_dump.sql
+
 
 TRAFODION
 
