@@ -1,10 +1,19 @@
 MONGODB
 
 import da csv:
-
+inserimento:
 mongoimport --db nomedb --collection nomecollezione --type csv --headerline --file percorso/file.csv
 
 mongo (shell)
+
+select:
+mongo testing_db  --eval "db.customers.find({first_name:'Hosea'}).pretty().shellPrint()"
+
+indexed search:
+mongo testing_db  --eval "db.customers.find({_id:ObjectId('5968e6c759d6f49f66045aa7')}).pretty().shellPrint()"
+
+aggregazione:
+mongo testing_db  --eval 'db.customers.aggregate(    [      { $group: { "_id": "$first_name", "avg": { $avg: "$income" } } }    ] ).pretty().shellPrint();'
 
 REDIS
 
@@ -82,10 +91,24 @@ import da csv:   <------ più semplice
 scrivi configurazione etl in file json: import_orient_10000.json
 
 comandi:
-/orientdb/bin/oetl.sh /shared_import/import_orient_10000.json
+/orientdb/bin/oetl.sh /shared_scripts/import_orient_10000.json
 
-check del db tramite console: orientdb/bin/console.sh
+check del db tramite console: /orientdb/bin/console.sh
+connect to db: connect plocal:/temp/databases/mock admin admin
 si interroga con query tipo: select * from Customer where income > 90
+
+search:
+/orientdb/bin/console.sh 'connect plocal:/temp/databases/mock admin admin; select from Customer where first_name = "Hosea"'
+
+indexed search:
+/orientdb/bin/console.sh 'connect plocal:/temp/databases/mock admin admin; select from Customer where Id = 1'
+
+aggregazione:
+/orientdb/bin/console.sh 'connect plocal:/temp/databases/mock admin admin; select avg(income) FROM Customer'
+
+join:
+???
+
 
 CASSANDRA
 
