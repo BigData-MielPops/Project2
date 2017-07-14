@@ -162,6 +162,19 @@ query: select * from table;
 
 postgres vuole utf-8
 
+search:
+psql -U postgres -d mock -c "SELECT * FROM customers where first_name = 'Hosea'"
+
+indexed search:
+SELECT * FROM customers where id = 1
+
+aggregazione:
+select avg(income) as avg_income from customers
+
+join:
+select * from customers a, customers b where a.first_name = b.first_name;
+
+
 MYSQL
 
 import csv:
@@ -176,6 +189,8 @@ log: mysql -u root -p
 show databases
 use database_name
 show tables
+
+
 
 MEMSQL
 
