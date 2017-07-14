@@ -59,21 +59,21 @@ enter cypher shell
 ./cypher-shell
 
 read:
-match (n) return n;
+echo "match (n) return n;" | /var/lib/neo4j/bin/cypher-shell 
 
 select:
-MATCH (n) WHERE n.firstName = 'Hosea' RETURN n;
+echo "MATCH (n) WHERE n.firstName = 'Hosea' RETURN n;" | /var/lib/neo4j/bin/cypher-shell 
 
 select indexed:
-MATCH (n) WHERE ID(n) = 1 RETURN n;
+echo "MATCH (n) WHERE ID(n) = 1 RETURN n;" | /var/lib/neo4j/bin/cypher-shell
 
 aggregazione:
-match (n:Customer) return count(*);
-match (n:Customer) return avg(n.income);
+echo "match (n:Customer) return count(*);" | /var/lib/neo4j/bin/cypher-shell
+echo "match (n:Customer) return avg(n.income);" | /var/lib/neo4j/bin/cypher-shell
 
-prima del join: MATCH (n:Customer) CREATE (n)-[r:Autoedge]->(n) RETURN r;
+prima del join: echo "MATCH (n:Customer) CREATE (n)-[r:Autoedge]->(n) RETURN r;" | /var/lib/neo4j/bin/cypher-shell
 join:
-MATCH (n:Customer)-[:Autoedge]->(m:Customer) WHERE n.firstName = m.firstName RETURN n, m limit 5;
+echo "MATCH (n:Customer)-[:Autoedge]->(m:Customer) WHERE n.firstName = m.firstName RETURN n, m limit 5;" | /var/lib/neo4j/bin/cypher-shell
 
 set mock.db active:
 in conf/neo4j_conf
@@ -116,7 +116,19 @@ import da csv:
 https://docs.datastax.com/en/cql/3.1/cql/cql_reference/copy_r.html
 
 comandi:
-cqlsh -f /shared_data/import_mock_10000.cql
+cqlsh -f /shared_scripts/import_mock_10000.cql
+
+search:
+cqlsh -k mock_keyspace -e "select * from customers where first_name = 'Hosea' allow filtering;"
+
+indexed search:
+cqlsh -k mock_keyspace -e "select * from customers where id = 1 allow filtering;"
+
+aggregazione:
+cqlsh -k mock_keyspace -e "select avg(income) as avg_income from customers;"
+
+join:
+/
 
 POSTGRES
 
