@@ -14,8 +14,24 @@ https://redis.io/topics/mass-insert
 
 https://codereview.stackexchange.com/questions/68612/store-csv-in-redis
 
+inserimento:
 cat /shared_data/mock_data_10000_rows2.csv | redis-cli --pipe
+
+search: /
+
+indexed search:
 echo GET 0 | redis-cli
+
+inserimento in set
+cat /shared_data/mock_data_10000_set.csv | redis-cli --pipe
+
+aggregazione:
+echo zcount mylist -inf +inf | redis-cli
+
+read:
+echo keys * | redis-cli
+
+join: /
 
 NEO4J
 
@@ -23,10 +39,23 @@ import da csv:
 https://neo4j.com/developer/guide-importing-data-and-etl/
 https://neo4j.com/developer/guide-import-csv/
 
-//commands to run:
-// cp /shared_data/mock_data_10000_neo.csv /var/lib/neo4j/import
-//
+commands to run:
+cp /shared_data/mock_data_10000_neo.csv /var/lib/neo4j/import
+cat /shared_scripts/import_mock_10000.cypher | /var/lib/neo4j/bin/cypher-shell 
+
+//non funziona:
 // bin/neo4j-admin import --mode=csv --database=mock.db  --nodes:Customer import/mock_data_10000_neo.csv --id-type=string
+
+set mock.db active:
+in conf/neo4j_conf
+dbms.active_database = mock.db
+
+in bin/neo4j stop e bin/neo4j start
+
+enter cypher shell 
+./cypher-shell
+
+
 
 ORIENTDB
 
