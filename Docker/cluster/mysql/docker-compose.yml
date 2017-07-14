@@ -1,0 +1,108 @@
+version: "2.1"
+
+networks:    
+  cluster:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 192.168.0.0/16
+
+services:
+
+#sql
+
+#in mysql_cluster container do:
+#ndb_mgm
+#ndb_mgm> show
+  mysqlManagement1:
+    image: mysql/mysql-cluster
+    privileged: true
+    container_name: mysqlManagement1
+    tty: true
+    hostname: mysqlManagement1
+    command: ndb_mgmd
+    environment:
+      - HOSTNAME=mysqlManagement1
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - "../../shared_data:/shared_data"
+      - "../../shared_scripts:/shared_scripts"
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.2
+        
+  mysqlndb1:
+    image: mysql/mysql-cluster
+    privileged: true
+    container_name: mysqlndb1
+    tty: true
+    hostname: mysqlndb1
+    depends_on:
+      - "mysqlManagement1"
+    command: ndbd
+    environment:
+      - HOSTNAME=mysqlndb1
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - "../../shared_data:/shared_data"
+      - "../../shared_scripts:/shared_scripts"
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.3
+        
+  mysqlndb2:
+    image: mysql/mysql-cluster
+    privileged: true
+    container_name: mysqlndb2
+    tty: true
+    hostname: mysqlndb2
+    depends_on:
+      - "mysqlManagement1"
+    command: ndbd
+    environment:
+      - HOSTNAME=mysqlndb2
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - "../../shared_data:/shared_data"
+      - "../../shared_scripts:/shared_scripts"
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.4
+         
+  mysql:
+    image: mysql/mysql-cluster
+    privileged: true
+    container_name: mysql
+    tty: true
+    hostname: mysql
+    depends_on:
+      - "mysqlndb2"
+      - "mysqlndb1"
+    command: mysqld
+    environment:
+      - HOSTNAME=mysql
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - "../../shared_data:/shared_data"
+      - "../../shared_scripts:/shared_scripts"
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.10
+        
+  mysql_cluster:
+    image: mysql/mysql-cluster
+    privileged: true
+    container_name: mysql_cluster
+    tty: true
+    hostname: mysql_cluster
+    depends_on:
+      - "mysql"
+    environment:
+      - HOSTNAME=mysql_cluster
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - "../../shared_data:/shared_data"
+      - "../../shared_scripts:/shared_scripts"
+    networks:
+      cluster:
+        ipv4_address: 192.168.0.100
