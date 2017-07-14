@@ -1,0 +1,88 @@
+version: "2.1"
+
+networks:
+  voltLocalCluster:
+    driver: bridge
+
+
+services:
+
+#newsql
+
+  voltdb1:
+    image: voltdb/voltdb-community
+    privileged: true
+    container_name: voltdb1
+    tty: true
+    hostname: voltdb1
+    ports:
+      - "2200:22"
+      - "3021:3021" 
+      - "5555:5555" 
+      - "7181:7181" 
+      - "8085:8080" 
+      - "8086:8081" 
+      - "9001:9000" 
+      - "21211:21211"
+      - "21212:21212"
+    environment:
+      - HOST_COUNT=4
+      - HOSTS=voltdb1,voltdb2,voltdb3,voltdb4
+    volumes:
+      - "../../shared_data:/shared_data"
+      - "../../shared_scripts:/shared_scripts"
+    networks: 
+      - voltLocalCluster
+      
+  voltdb2:
+    image: voltdb/voltdb-community
+    privileged: true
+    container_name: voltdb2
+    tty: true
+    hostname: voltdb2
+    depends_on:
+      - "voltdb1"
+    environment:
+      - HOST_COUNT=4
+      - HOSTS=voltdb1,voltdb2,voltdb3,voltdb4
+    volumes:
+      - "../../shared_data:/shared_data"
+      - "../../shared_scripts:/shared_scripts"
+    networks: 
+      - voltLocalCluster
+      
+  voltdb3:
+    image: voltdb/voltdb-community
+    privileged: true
+    container_name: voltdb3
+    tty: true
+    hostname: voltdb3
+    depends_on:
+      - "voltdb1"
+    environment:
+      - HOST_COUNT=4
+      - HOSTS=voltdb1,voltdb2,voltdb3,voltdb4
+    volumes:
+      - "../../shared_data:/shared_data"
+      - "../../shared_scripts:/shared_scripts"
+    networks: 
+      - voltLocalCluster
+      
+  voltdb4:
+    image: voltdb/voltdb-community
+    privileged: true
+    container_name: voltdb4
+    tty: true
+    hostname: voltdb4
+    depends_on:
+      - "voltdb1"
+    environment:
+      - HOST_COUNT=4
+      - HOSTS=voltdb1,voltdb2,voltdb3,voltdb4
+    volumes:
+      - "../../shared_data:/shared_data"
+      - "../../shared_scripts:/shared_scripts"
+    networks: 
+      - voltLocalCluster
+      
+ 
