@@ -238,6 +238,18 @@ comandi:
 cat /shared_scripts/import_voltdb.sql | sqlcmd
 /opt/voltdb/bin/csvloader customers -f /shared_data/mock_data_10000_rows.csv
 
+search:
+echo "select * from customers where first_name = 'Hosea';" | sqlcmd
+
+indexed search:
+echo "SELECT * FROM customers where id = 1" | sqlcmd
+
+aggregazione:
+echo "select avg(income) as avg_income from customers" | sqlcmd
+
+join:
+echo "select * from customers a, customers b where a.first_name = b.first_name;" | sqlcmd
+
 COCKROACH
 
 https://www.cockroachlabs.com/docs/stable/import-data.html
