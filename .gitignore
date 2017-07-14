@@ -102,3 +102,5 @@ ENV/
 
 
 Docker/shared-data/sociallink*
+Docker/shared_data/sociallink.json
+Docker/shared_data/sociallink.csv
