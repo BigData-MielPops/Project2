@@ -15,8 +15,8 @@ services:
     environment:
       - HOSTNAME=localhost
     volumes:
-      - "./shared-data:/shared_data"
-      - "./shared-scripts:/shared_scripts"
+      - "./shared_data:/shared_data"
+      - "./shared_scripts:/shared_scripts"
       
   redis:
     image: redis
@@ -29,8 +29,8 @@ services:
     environment:
       - HOSTNAME=localhost
     volumes:
-      - "./shared-data:/shared_data"
-      - "./shared-scripts:/shared_scripts"
+      - "./shared_data:/shared_data"
+      - "./shared_scripts:/shared_scripts"
 
   neo4j:
     image: neo4j
@@ -45,8 +45,8 @@ services:
       - HOSTNAME=localhost
       - NEO4J_AUTH=none
     volumes:
-      - "./shared-data:/shared_data"
-      - "./shared-scripts:/shared_scripts"
+      - "./shared_data:/shared_data"
+      - "./shared_scripts:/shared_scripts"
       
   orientdb:
     image: orientdb
@@ -61,8 +61,8 @@ services:
       - HOSTNAME=localhost
       - ORIENTDB_ROOT_PASSWORD=password
     volumes:
-      - "./shared-data:/shared_data"
-      - "./shared-scripts:/shared_scripts"
+      - "./shared_data:/shared_data"
+      - "./shared_scripts:/shared_scripts"
       
   cassandra:
     image: cassandra
@@ -74,8 +74,8 @@ services:
       - "9042:9042"
       - "7199:7199"
     volumes:
-      - "./shared-data:/shared_data"
-      - "./shared-scripts:/shared_scripts"
+      - "./shared_data:/shared_data"
+      - "./shared_scripts:/shared_scripts"
 
 #sql
 
@@ -91,8 +91,8 @@ services:
       - HOSTNAME=localhost
       - POSTGRES_PASSWORD=password
     volumes:
-      - "./shared-data:/shared_data"
-      - "./shared-scripts:/shared_scripts"
+      - "./shared_data:/shared_data"
+      - "./shared_scripts:/shared_scripts"
 
   mysql:
     image: mysql
@@ -106,8 +106,8 @@ services:
       - HOSTNAME=localhost
       - MYSQL_ROOT_PASSWORD=password
     volumes:
-      - "./shared-data:/shared_data"
-      - "./shared-scripts:/shared_scripts"
+      - "./shared_data:/shared_data"
+      - "./shared_scripts:/shared_scripts"
 
 #newsql
 
@@ -123,8 +123,8 @@ services:
     environment:
       - HOSTNAME=localhost
     volumes:
-      - "./shared-data:/shared_data"
-      - "./shared-scripts:/shared_scripts"
+      - "./shared_data:/shared_data"
+      - "./shared_scripts:/shared_scripts"
 
   voltdb:
     image: voltdb/voltdb-community
@@ -146,8 +146,8 @@ services:
       - HOST_COUNT=1 
       - HOSTS=voltdb
     volumes:
-      - "./shared-data:/shared_data"
-      - "./shared-scripts:/shared_scripts"
+      - "./shared_data:/shared_data"
+      - "./shared_scripts:/shared_scripts"
       
   cockroach:
     image: cockroachdb/cockroach
@@ -162,8 +162,8 @@ services:
     environment:
       - HOSTNAME=cockroach
     volumes:
-      - "./shared-data:/shared_data"
-      - "./shared-scripts:/shared_scripts"
+      - "./shared_data:/shared_data"
+      - "./shared_scripts:/shared_scripts"
       
   trafodion:
   #The password of trafodion is traf123
@@ -181,8 +181,8 @@ services:
       - "23403:23403"
       - "24400:24400"
     volumes:
-      - "./shared-data:/shared_data"
-      - "./shared-scripts:/shared_scripts"
+      - "./shared_data:/shared_data"
+      - "./shared_scripts:/shared_scripts"
 
 # docker build -t nuodb:latest ./nuodb-docker
   nuodb:
@@ -203,6 +203,6 @@ services:
       - PASSWORD=developer
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/nuodb/bin
     volumes:
-      - "./shared-data:/shared_data"
-      - "./shared-scripts:/shared_scripts"
+      - "./shared_data:/shared_data"
+      - "./shared_scripts:/shared_scripts"
 
