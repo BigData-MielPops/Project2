@@ -4,7 +4,7 @@ networks:
   cluster:
     driver: bridge
     ipam:
-     config:
+      config:
        - subnet: 192.168.0.0/16
 
 services:
@@ -14,6 +14,9 @@ services:
 #in mysql_cluster container do:
 #ndb_mgm
 #ndb_mgm> show
+# to get the password: docker logs mysql1 2>&1 | grep password
+# ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
+# GRANT ALL ON *.* to root@'172.17.0.1' IDENTIFIED BY 'password'
   mysqlManagement1:
     image: mysql/mysql-cluster
     privileged: true
@@ -79,6 +82,8 @@ services:
       - "mysqlndb2"
       - "mysqlndb1"
     command: mysqld
+    ports:
+      - "3307:3306" 
     environment:
       - HOSTNAME=mysql
       - MYSQL_ROOT_PASSWORD=password
@@ -88,6 +93,7 @@ services:
     networks:
       cluster:
         ipv4_address: 192.168.0.10
+        
         
   mysql_cluster:
     image: mysql/mysql-cluster
@@ -106,3 +112,4 @@ services:
     networks:
       cluster:
         ipv4_address: 192.168.0.100
+        

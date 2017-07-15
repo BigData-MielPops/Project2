@@ -9,12 +9,12 @@ services:
 
 #newsql
 
-  voltdb1:
+  voltdb:
     image: voltdb/voltdb-community
     privileged: true
-    container_name: voltdb1
+    container_name: voltdb
     tty: true
-    hostname: voltdb1
+    hostname: voltdb
     ports:
       - "2200:22"
       - "3021:3021" 
@@ -27,7 +27,7 @@ services:
       - "21212:21212"
     environment:
       - HOST_COUNT=4
-      - HOSTS=voltdb1,voltdb2,voltdb3,voltdb4
+      - HOSTS=voltdb,voltdb2,voltdb3,voltdb4
     volumes:
       - "../../shared_data:/shared_data"
       - "../../shared_scripts:/shared_scripts"
@@ -41,10 +41,10 @@ services:
     tty: true
     hostname: voltdb2
     depends_on:
-      - "voltdb1"
+      - "voltdb"
     environment:
       - HOST_COUNT=4
-      - HOSTS=voltdb1,voltdb2,voltdb3,voltdb4
+      - HOSTS=voltdb,voltdb2,voltdb3,voltdb4
     volumes:
       - "../../shared_data:/shared_data"
       - "../../shared_scripts:/shared_scripts"
@@ -58,10 +58,10 @@ services:
     tty: true
     hostname: voltdb3
     depends_on:
-      - "voltdb1"
+      - "voltdb"
     environment:
       - HOST_COUNT=4
-      - HOSTS=voltdb1,voltdb2,voltdb3,voltdb4
+      - HOSTS=voltdb,voltdb2,voltdb3,voltdb4
     volumes:
       - "../../shared_data:/shared_data"
       - "../../shared_scripts:/shared_scripts"
@@ -75,10 +75,10 @@ services:
     tty: true
     hostname: voltdb4
     depends_on:
-      - "voltdb1"
+      - "voltdb"
     environment:
       - HOST_COUNT=4
-      - HOSTS=voltdb1,voltdb2,voltdb3,voltdb4
+      - HOSTS=voltdb,voltdb2,voltdb3,voltdb4
     volumes:
       - "../../shared_data:/shared_data"
       - "../../shared_scripts:/shared_scripts"
