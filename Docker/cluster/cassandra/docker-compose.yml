@@ -1,7 +1,7 @@
 version: "2.1"
 
 networks:
-  cassandra:
+  cassandra_net:
     driver: bridge
     ipam:
      config:
@@ -13,10 +13,10 @@ services:
 #nosql
 
   # nodetool status to check cluster
-  cassandra1:
+  cassandra:
     image: cassandra
     privileged: true
-    container_name: cassandra1
+    container_name: cassandra
     tty: true
     ports:
       - "7000:7000"
@@ -28,7 +28,7 @@ services:
     environment:
       - CASSANDRA_BROADCAST_ADDRESS=10.5.0.200
     networks:                                                                                                                                                                                                                                                                  
-      cassandra:                                                                                                                                                                                                                                                                  
+      cassandra_net:                                                                                                                                                                                                                                                                  
         ipv4_address: 10.5.0.200
       
   cassandra2:
@@ -40,12 +40,12 @@ services:
       - "../../shared_data:/shared_data"
       - "../../shared_scripts:/shared_scripts"
     depends_on: 
-      - "cassandra1"
+      - "cassandra"
     environment:
       - CASSANDRA_BROADCAST_ADDRESS=10.5.0.201
       - CASSANDRA_SEEDS=10.5.0.200
     networks:                                                                                                                                                                                                                                                                  
-      cassandra:                                                                                                                                                                                                                                                                  
+      cassandra_net:                                                                                                                                                                                                                                                                  
         ipv4_address: 10.5.0.201
         
   cassandra3:
@@ -57,12 +57,12 @@ services:
       - "../../shared_data:/shared_data"
       - "../../shared_scripts:/shared_scripts"
     depends_on: 
-      - "cassandra1"
+      - "cassandra"
     environment:
       - CASSANDRA_BROADCAST_ADDRESS=10.5.0.202
       - CASSANDRA_SEEDS=10.5.0.200
     networks:                                                                                                                                                                                                                                                                  
-      cassandra:                                                                                                                                                                                                                                                                  
+      cassandra_net:                                                                                                                                                                                                                                                                  
         ipv4_address: 10.5.0.202
         
   cassandra4:
@@ -74,11 +74,11 @@ services:
       - "../../shared_data:/shared_data"
       - "../../shared_scripts:/shared_scripts"
     depends_on: 
-      - "cassandra1"
+      - "cassandra"
     environment:
       - CASSANDRA_BROADCAST_ADDRESS=10.5.0.203
       - CASSANDRA_SEEDS=10.5.0.200
     networks:                                                                                                                                                                                                                                                                  
-      cassandra:                                                                                                                                                                                                                                                                  
+      cassandra_net:                                                                                                                                                                                                                                                                  
         ipv4_address: 10.5.0.203
     
